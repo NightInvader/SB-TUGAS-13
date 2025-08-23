@@ -2,11 +2,11 @@ package main
 
 import (
 	"database/sql"
-	"tugas-13/controllers"
-	"tugas-13/routers"
-
 	"fmt"
 	"os"
+	"strings"
+	"tugas-13/controllers"
+	"tugas-13/routers"
 
 	_ "github.com/lib/pq"
 )
@@ -31,6 +31,8 @@ func main() {
 	// 	os.Getenv("PGDATABASE"),
 	// )
 	dsn := os.Getenv("DATABASE_URL")
+	dsn = strings.Replace(dsn, "postgresql://", "postgres://", 1)
+	dsn = dsn + "?sslmode=require"
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {
 		panic(err)
