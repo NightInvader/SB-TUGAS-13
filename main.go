@@ -6,25 +6,28 @@ import (
 	"tugas-13/routers"
 
 	"fmt"
+	"os"
 
 	_ "github.com/lib/pq"
 )
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "sadam"
-	dbname   = "bioskop"
-)
+// const (
+// 	host     = "localhost"
+// 	port     = 5432
+// 	user     = "postgres"
+// 	password = "sadam"
+// 	dbname   = "bioskop"
+// )
 
 var db *sql.DB
 var err error
 
 func main() {
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+	// psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+	dsn := os.Getenv("DATABASE_URL")
+	db, err := sql.Open("postgres", dsn)
 
-	db, err = sql.Open("postgres", psqlInfo)
+	// db, err = sql.Open("postgres", psqlInfo)
 	if err != nil {
 		panic(err)
 	}
@@ -38,8 +41,11 @@ func main() {
 
 	fmt.Println("Successfully Connected do database")
 
-	var PORT = ":8080"
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 
-	routers.StartServer().Run(PORT)
+	routers.StartServer().Run(port)
 
 }
