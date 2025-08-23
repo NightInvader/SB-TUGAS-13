@@ -3,7 +3,6 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"os"
 	"tugas-13/controllers"
 	"tugas-13/routers"
 
@@ -48,6 +47,8 @@ func main() {
 
 	fmt.Println("Successfully Connected do database")
 
-	routers.StartServer().Run(os.Getenv("PORT"))
+	PORT := ":5432"
+
+	routers.StartServer().Run(PORT)
 
 }
