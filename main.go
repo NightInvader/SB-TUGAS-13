@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"os"
-	"strings"
 	"tugas-13/controllers"
 	"tugas-13/routers"
 
@@ -30,9 +29,9 @@ func main() {
 	// 	os.Getenv("PGPASSWORD"),
 	// 	os.Getenv("PGDATABASE"),
 	// )
-	dsn := os.Getenv("DATABASE_URL")
-	dsn = strings.Replace(dsn, "postgresql://", "postgres://", 1)
-	dsn = dsn + "?sslmode=require"
+	dsn := `PGPASSWORD=WOSkXRZNyOUyfZDSRlDqTsrzqIKmozNu psql -h crossover.proxy.rlwy.net -U postgres -p 58596 -d railway`
+	// dsn = strings.Replace(dsn, "postgresql://", "postgres://", 1)
+	// dsn = dsn + "?sslmode=require"
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {
 		panic(err)
