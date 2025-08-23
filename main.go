@@ -23,7 +23,7 @@ var db *sql.DB
 var err error
 
 func main() {
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		os.Getenv("PGHOST"),
 		os.Getenv("PGPORT"),
 		os.Getenv("PGUSER"),
@@ -47,11 +47,6 @@ func main() {
 
 	fmt.Println("Successfully Connected do database")
 
-	port := os.Getenv("PGPORT")
-	if port == "" {
-		port = "8080"
-	}
-
-	routers.StartServer().Run(port)
+	routers.StartServer().Run(os.Getenv("PGPORT"))
 
 }
