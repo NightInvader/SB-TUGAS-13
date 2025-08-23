@@ -23,11 +23,17 @@ var db *sql.DB
 var err error
 
 func main() {
-	// psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
-	dsn := os.Getenv("DATABASE_URL")
-	db, err := sql.Open("postgres", dsn)
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+		os.Getenv("PGHOST"),
+		os.Getenv("PGPORT"),
+		os.Getenv("PGUSER"),
+		os.Getenv("PGPASSWORD"),
+		os.Getenv("PGDATABASE"),
+	)
+	// dsn := os.Getenv("DATABASE_URL")
+	// db, err := sql.Open("postgres", dsn)
 
-	// db, err = sql.Open("postgres", psqlInfo)
+	db, err = sql.Open("postgres", psqlInfo)
 	if err != nil {
 		panic(err)
 	}
