@@ -47,7 +47,7 @@ func main() {
 
 	fmt.Println("Successfully Connected do database")
 
-	port := os.Getenv("PORT")
+	port := os.Getenv("PGPORT")
 	if port == "" {
 		port = "8080"
 	}
