@@ -29,7 +29,7 @@ func main() {
 	// 	os.Getenv("PGPASSWORD"),
 	// 	os.Getenv("PGDATABASE"),
 	// )
-	dsn := `PGPASSWORD=WOSkXRZNyOUyfZDSRlDqTsrzqIKmozNu psql = -h crossover.proxy.rlwy.net -U postgres -p 58596 -d railway`
+	dsn := `PGPASSWORD=WOSkXRZNyOUyfZDSRlDqTsrzqIKmozNu psql = -h crossover.proxy.rlwy.net = -U postgres = -p 58596 = -d railway`
 	// dsn = strings.Replace(dsn, "postgresql://", "postgres://", 1)
 	// dsn = dsn + "?sslmode=require"
 	db, err := sql.Open("postgres", dsn)
